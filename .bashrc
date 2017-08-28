@@ -185,6 +185,14 @@ gshw() {
 }
 
 
+gdel() {
+	grsh "$1";
+	git clean -fd;
+	git pull;
+	git status
+}
+
+
 
 #  create new alias from cmd line
 # ALIASES=~/.aliases
