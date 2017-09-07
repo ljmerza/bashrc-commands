@@ -52,6 +52,7 @@ alias nginxt='sudo /usr/local/nginx/sbin/nginx -t'
 alias cpuinfo='lscpu'
 
 alias psgp='ps -efaux | grep'
+alias psmy='ps aux | grep $USER'
 
 
 #-------------------------------------------------------------
@@ -63,8 +64,6 @@ alias egrep='egrep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias mkdir='mkdir -pv' #make parent dirs if needed
 alias mount='mount | column -t'
-alias ps='ps u | column -t'
-
 
 #-------------------------------------------------------------
 # iptables aliases
@@ -124,6 +123,20 @@ alias app-search-all="apt-cache search"
 alias app-update="sudo apt-get update && sudo apt-get upgrade"
 alias app-info="apt-cache showpkg"
 
+
+#-------------------------------------------------------------
+# work aliases
+#-------------------------------------------------------------
+alias it2="gunicorn index.py --log-level debug --timeout 60"
+alias embs="cd /opt/$USER/www/UD-ember;ember serve"
+alias embp="ember build --prod"
+alias cdww="cd /opt/$USER/www/"
+code(){
+	cd c:/codebase/"$1"
+}
+alias acoe='ssh acoe'
+alias home='cd /home/$USER/'
+alias itrack2='cd /home/$USER/iTrack2;it2'
 
 #-------------------------------------------------------------
 # Git aliases and functions
