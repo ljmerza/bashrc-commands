@@ -127,9 +127,9 @@ alias app-info="apt-cache showpkg"
 #-------------------------------------------------------------
 # work aliases
 #-------------------------------------------------------------
-alias it2="gunicorn index.py --log-level debug --timeout 60"
-alias embs="cd /opt/$USER/www/UD-ember;ember serve"
-alias embp="ember build --prod"
+alias it2="gunicorn index.py --log-level debug --timeout 6000"
+alias embs="cd /opt/$USER/www/UD_ember/UD/;rm -rf tmp/;ember serve"
+alias embp="cd /opt/$USER/www/UD_ember/UD/;ember build --prod"
 alias cdww="cd /opt/$USER/www/"
 code(){
 	cd c:/codebase/"$1"
