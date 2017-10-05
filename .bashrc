@@ -138,6 +138,15 @@ alias acoe='ssh acoe'
 alias home='cd /home/$USER/'
 alias itrack2='cd /home/$USER/iTrack2;it2'
 
+em () { 
+	cd /opt/$USER/www/"$1"/UD_ember/UD/
+}
+
+alias rmbn='rm -rdf node_modules && rm -rdf bower_components'
+alias adbn='bower install && npm install'
+alias chbn='bower cache clean && npm cache clean'
+alias embr='rmbn && chbn && adbn'
+
 #-------------------------------------------------------------
 # Git aliases and functions
 #-------------------------------------------------------------
