@@ -1,6 +1,8 @@
 # .bashrc
 
-# Source global definitions
+#-------------------------------------------------------------
+# Source global definitions (if any)
+#-------------------------------------------------------------
 if [ -f /etc/bashrc ]; then
 	. /etc/bashrc
 fi
@@ -16,18 +18,90 @@ __git_complete gpll _git_pull
 # User specific aliases and functions
 umask 007
 
+DISPLAY=$(hostname)
+
+# If not running interactively, don't do anything
+[ -z "$PS1" ] && return
+
 #-------------------------------------------------------------
-# ls aliases
+# Color definitions (taken from Color Bash Prompt HowTo).
 #-------------------------------------------------------------
-alias ls='ls -lasFH --color=always | column -t'
-alias lsx='ls -lXB' # Sort by extension
-alias lsk='ls -lSr' # Sort by size, biggest last
-alias lst='ls -ltr' # Sort by date, most recent last
-alias lsc='ls -ltcr' # Sort by/show change time,most recent last
-alias lsu='ls -ltur' # Sort by/show access time,most recent last
-alias lsl="ls -lv --group-directories-first"
-alias lsm='ls | more' # Pipe through 'more'
-alias lsa='ll -a'  # Show hidden files
+# Normal Colors
+Black='\e[0;30m'        # Black
+Red='\e[0;31m'          # Red
+Green='\e[0;32m'        # Green
+Yellow='\e[0;33m'       # Yellow
+Blue='\e[0;34m'         # Blue
+Purple='\e[0;35m'       # Purple
+Cyan='\e[0;36m'         # Cyan
+White='\e[0;37m'        # White
+
+# Bold
+BBlack='\e[1;30m'       # Black
+BRed='\e[1;31m'         # Red
+BGreen='\e[1;32m'       # Green
+BYellow='\e[1;33m'      # Yellow
+BBlue='\e[1;34m'        # Blue
+BPurple='\e[1;35m'      # Purple
+BCyan='\e[1;36m'        # Cyan
+BWhite='\e[1;37m'       # White
+
+# Background
+On_Black='\e[40m'       # Black
+On_Red='\e[41m'         # Red
+On_Green='\e[42m'       # Green
+On_Yellow='\e[43m'      # Yellow
+On_Blue='\e[44m'        # Blue
+On_Purple='\e[45m'      # Purple
+On_Cyan='\e[46m'        # Cyan
+On_White='\e[47m'       # White
+
+NC="\e[m"               # Color Reset
+ALERT=${BWhite}${On_Red} # Bold White on red background
+
+
+echo -e "${BCyan}This is BASH ${BRed}${BASH_VERSION%.*}${BCyan} on ${BRed}$DISPLAY${NC}\n"
+date
+
+# parse out git branch checked out
+parse_git_branch() {
+     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
+}
+
+# Now we construct the prompt:
+# Time of day:
+PS1="[\A\[${NC}\] "
+# User@Host:
+PS1=${PS1}"\[${BCyan}\]\u\[${NC}\]@\[${Green}\]\h\[${NC}\] "
+# PWD:
+PS1=${PS1}"\W]\[${NC}\]"
+# git branch
+PS1=${PS1}"\[${Yellow}\]\$(parse_git_branch)\[${NC}\] > "
+
+
+export TIMEFORMAT=$'\nreal %3R\tuser %3U\tsys %3S\tpcpu %P\n'
+export HISTIGNORE="&:bg:fg:ll:h"
+export HISTTIMEFORMAT="$(echo -e ${BCyan})[%d/%m %H:%M:%S]$(echo -e ${NC}) "
+export HISTCONTROL=ignoredups
+export HOSTFILE=$HOME/.hosts    # Put a list of remote hosts in ~/.hosts
+
+#-------------------------------------------------------------
+# The 'ls' family
+#-------------------------------------------------------------
+# Add colors for filetype and  human-readable sizes by default on 'ls':
+alias ls='ls -h --color'
+alias lx='ls -lXB'         #  Sort by extension.
+alias lk='ls -lSr'         #  Sort by size, biggest last.
+alias lt='ls -ltr'         #  Sort by date, most recent last.
+alias lc='ls -ltcr'        #  Sort by/show change time,most recent last.
+alias lu='ls -ltur'        #  Sort by/show access time,most recent last.
+
+# The ubiquitous 'll': directories first, with alphanumeric sorting:
+alias ll="ls -lv --group-directories-first"
+alias lm='ll | less'        #  Pipe through 'more'
+alias lr='ll -R'           #  Recursive ls.
+alias la='ll -A'           #  Show hidden files.
+alias tree='tree -Csuh'    #  Nice alternative to 'recursive ls' ...
 
 #-------------------------------------------------------------
 # misc aliases
@@ -52,13 +126,26 @@ alias nginxt='sudo /usr/local/nginx/sbin/nginx -t'
 alias cpuinfo='lscpu'
 
 alias psgp='ps -efaux | grep'
-alias psmy='ps aux | grep $USER'
+alias psgp=gpps
+alias myps='ps aux | grep $USER'
+alias psmy=myps
 
+# Pretty-print of some PATH variables:
+alias path='echo -e ${PATH//:/\\n}'
+alias libpath='echo -e ${LD_LIBRARY_PATH//:/\\n}'
 
-#-------------------------------------------------------------
-# override aliases
-#-------------------------------------------------------------
-alias history="history | more"
+alias rm='rm -i'
+alias cp='cp -i'
+alias mv='mv -i'
+# -> Prevents accidentally clobbering files.
+alias mkdir='mkdir -p'
+
+# alias history="history | less"
+alias h='history'
+alias j='jobs -l'
+alias which='type -a'
+alias ..='cd ..'
+
 alias grep='grep --color=auto'
 alias egrep='egrep --color=auto'
 alias fgrep='fgrep --color=auto'
@@ -109,6 +196,7 @@ alias kk='ll'
 alias sl='ls'
 alias le='ls'
 alias gerp=grep
+
 
 
 #-------------------------------------------------------------
