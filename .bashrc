@@ -76,7 +76,7 @@ PS1=${PS1}"\[${BCyan}\]\u\[${NC}\]@\[${Green}\]\h\[${NC}\] "
 # PWD:
 PS1=${PS1}"\W]\[${NC}\]"
 # git branch
-PS1=${PS1}"\[${Yellow}\]\$(parse_git_branch)\[${NC}\] > "
+PS1=${PS1}"\[${Yellow}\]\$(parse_git_branch)\[${NC}\]> "
 
 
 export TIMEFORMAT=$'\nreal %3R\tuser %3U\tsys %3S\tpcpu %P\n'
