@@ -63,20 +63,17 @@ ALERT=${BWhite}${On_Red} # Bold White on red background
 echo -e "${BCyan}This is BASH ${BRed}${BASH_VERSION%.*}${BCyan} on ${BRed}$DISPLAY${NC}\n"
 date
 
-# parse out git branch checked out
-parse_git_branch() {
-     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
-}
-
 # Now we construct the prompt:
 # Time of day:
 PS1="[\A\[${NC}\] "
 # User@Host:
-PS1=${PS1}"\[${BCyan}\]\u\[${NC}\]@\[${Green}\]\h\[${NC}\] "
+PS1+="\[${BCyan}\]\u\[${NC}\]@\[${Green}\]\h\[${NC}\] "
 # PWD:
-PS1=${PS1}"\W]\[${NC}\]"
+PS1+="\w]\[${Yellow}\]"
 # git branch
-PS1=${PS1}"\[${Yellow}\]\$(parse_git_branch)\[${NC}\]> "
+PS1+=' (`git branch | grep "^*" | cut -b 3-100`) '
+# new line
+PS1+=" \[${NC}\]\n$"
 
 
 export TIMEFORMAT=$'\nreal %3R\tuser %3U\tsys %3S\tpcpu %P\n'
@@ -272,6 +269,14 @@ alias ggui='git gui'
 
 alias gcph='gcom "automated commit";gpsh'
 alias gcphu='gcph -u'
+
+alias grbc='git rebase --continue'
+alias grba='git rebase --abort'
+alias grbi='git rebase -i'
+
+grbs(){
+	git rebase "$1";
+}
 
 grsh() {
 	git reset --hard HEAD~"$1";
