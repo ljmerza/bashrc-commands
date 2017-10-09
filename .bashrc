@@ -4,7 +4,7 @@
 # Source global definitions (if any)
 #-------------------------------------------------------------
 if [ -f /etc/bashrc ]; then
-	. /etc/bashrc
+    . /etc/bashrc
 fi
 
 export TMOUT=0
@@ -63,17 +63,20 @@ ALERT=${BWhite}${On_Red} # Bold White on red background
 echo -e "${BCyan}This is BASH ${BRed}${BASH_VERSION%.*}${BCyan} on ${BRed}$DISPLAY${NC}\n"
 date
 
+# parse out git branch checked out
+parse_git_branch() {
+     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
+}
+
 # Now we construct the prompt:
 # Time of day:
 PS1="[\A\[${NC}\] "
 # User@Host:
 PS1+="\[${BCyan}\]\u\[${NC}\]@\[${Green}\]\h\[${NC}\] "
 # PWD:
-PS1+="\w]\[${Yellow}\]"
+PS1+="\w]\[${NC}\]"
 # git branch
-PS1+=' (`git branch | grep "^*" | cut -b 3-100`) '
-# new line
-PS1+=" \[${NC}\]\n$"
+PS1+="\[${Yellow}\] \\$(parse_git_branch)\[${NC}\] \n$"
 
 
 export TIMEFORMAT=$'\nreal %3R\tuser %3U\tsys %3S\tpcpu %P\n'
@@ -127,6 +130,8 @@ alias psgp=gpps
 alias myps='ps aux | grep $USER'
 alias psmy=myps
 
+alias killme='killall -u $USER'
+
 # Pretty-print of some PATH variables:
 alias path='echo -e ${PATH//:/\\n}'
 alias libpath='echo -e ${LD_LIBRARY_PATH//:/\\n}'
@@ -165,13 +170,13 @@ alias firewall=iptlist
 # cd aliases
 #-------------------------------------------------------------
 up() { 
-	cd ../"$1";
+    cd ../"$1";
 }
 upp() { 
-	cd ../../"$1";
+    cd ../../"$1";
 }
 uppp() { 
-	cd ../../../"$1";
+    cd ../../../"$1";
 }
 
 
@@ -217,14 +222,14 @@ alias embs="cd /opt/$USER/www/UD_ember/UD/;rm -rf tmp/;ember serve"
 alias embp="cd /opt/$USER/www/UD_ember/UD/;ember build --prod"
 alias cdww="cd /opt/$USER/www/"
 code(){
-	cd c:/codebase/"$1"
+    cd c:/codebase/"$1"
 }
 alias acoe='ssh acoe'
 alias home='cd /home/$USER/'
 alias itrack2='cd /home/$USER/iTrack2;it2'
 
 em () { 
-	cd /opt/$USER/www/"$1"/UD_ember/UD/
+    cd /opt/$USER/www/"$1"/UD_ember/UD/
 }
 
 alias rmbn='rm -rdf node_modules && rm -rdf bower_components'
@@ -275,36 +280,36 @@ alias grba='git rebase --abort'
 alias grbi='git rebase -i'
 
 grbs(){
-	git rebase "$1";
+    git rebase "$1";
 }
 
 grsh() {
-	git reset --hard HEAD~"$1";
+    git reset --hard HEAD~"$1";
 }
 
 gblm() { 
-	git blame -L"$1","$2" "$3"; 
+    git blame -L"$1","$2" "$3"; 
 }
 
 # save work, checkout master branch, merge into my branch, then commit/push
 gmrgm() {
-	gcom 'saving work';gchk "$1";gpll;gchk "$2";gmrg "$1";gcom 'merge';gpsh;
+    gcom 'saving work';gchk "$1";gpll;gchk "$2";gmrg "$1";gcom 'merge';gpsh;
 }
 
 glgp() {
-	git log -p -"$1"
+    git log -p -"$1"
 }
 
 gshw() {
-	git show "$1"
+    git show "$1"
 }
 
 
 gdel() {
-	grsh "$1";
-	git clean -fd;
-	git pull;
-	git status
+    grsh "$1";
+    git clean -fd;
+    git pull;
+    git status
 }
 
 
@@ -312,74 +317,74 @@ gdel() {
 #  create new alias from cmd line
 # ALIASES=~/.aliases
 # function add_alias {
-#	 echo "alias $1='$2'" >> $ALIASES;
-#	 echo Adding alias: `tail -1 $ALIASES`;
-#	 source $ALIASES;
+#    echo "alias $1='$2'" >> $ALIASES;
+#    echo Adding alias: `tail -1 $ALIASES`;
+#    source $ALIASES;
 # }
 
 mkcd () # mkdir and cd into it
 { 
-	mkdir -p "$1";
-	cd "$1"
+    mkdir -p "$1";
+    cd "$1"
 }
 
 #  create new repo on github
  gitRepo () {
-	 curl -u 'myuser' https://api.github.com/user/repos -d "{\"name\":\"\"$1\"\"}";
-	 git remote add origin git@github.com:myuser/"$1".git;
-	 git push -u origin master;
+     curl -u 'myuser' https://api.github.com/user/repos -d "{\"name\":\"\"$1\"\"}";
+     git remote add origin git@github.com:myuser/"$1".git;
+     git push -u origin master;
 }
 
 
 google () {
-	u=`perl -MURI::Escape -wle 'print "http://google.com/search?q=".
-		uri_escape(join " ",  @ARGV)' $@`
-	/usr/bin/w3m -F $u
+    u=`perl -MURI::Escape -wle 'print "http://google.com/search?q=".
+        uri_escape(join " ",  @ARGV)' $@`
+    /usr/bin/w3m -F $u
 }
 
 sublime() {
-	"C:/Program Files/Sublime Text 3/sublime_text.exe" "$1"
+    "C:/Program Files/Sublime Text 3/sublime_text.exe" "$1"
 }
 
 
 extract () {
-	if [ -f $1 ] ; then
-		case $1 in
-			*.tar.bz2) tar xvjf $1;;
-			*.tar.gz) tar xvzf $1;;
-			*.bz2) bunzip2 $1;;
-			*.rar) unrar x $1;;
-			*.gz) gunzip $1;;
-			*.tar) tar xvf $1;;
-			*.tbz2) tar xvjf $1;;
-			*.tgz) tar xvzf $1;;
-			*.zip) unzip $1;;
-			*.Z) uncompress $1;;
-			*.7z) 7za x $1;;
-			*.rar) unrar $1;;
-			*) echo "'$1' cannot be extracted via >extract<" ;;
-		esac
-	else
-		echo "'$1' is not a valid file"
-	fi
+    if [ -f $1 ] ; then
+        case $1 in
+            *.tar.bz2) tar xvjf $1;;
+            *.tar.gz) tar xvzf $1;;
+            *.bz2) bunzip2 $1;;
+            *.rar) unrar x $1;;
+            *.gz) gunzip $1;;
+            *.tar) tar xvf $1;;
+            *.tbz2) tar xvjf $1;;
+            *.tgz) tar xvzf $1;;
+            *.zip) unzip $1;;
+            *.Z) uncompress $1;;
+            *.7z) 7za x $1;;
+            *.rar) unrar $1;;
+            *) echo "'$1' cannot be extracted via >extract<" ;;
+        esac
+    else
+        echo "'$1' is not a valid file"
+    fi
 }
 
 
 
 mine(){ 
-	user=${1-$USER};
-	# list all results found
-	git branch -a | grep origin/$user; 
-	# get list of results, wc=get number of lines, pipe through echo output
-	git branch -a | grep origin/$user | wc -l | xargs -I count echo there are count branches by $user; 
+    user=${1-$USER};
+    # list all results found
+    git branch -a | grep origin/$user; 
+    # get list of results, wc=get number of lines, pipe through echo output
+    git branch -a | grep origin/$user | wc -l | xargs -I count echo there are count branches by $user; 
 }
 
 nuke(){
-	git branch -a | grep origin/$USER | grep -o $USER.* | xargs -I line git push origin :line; 
+    git branch -a | grep origin/$USER | grep -o $USER.* | xargs -I line git push origin :line; 
 }
 
 
 
 sfind(){
-	sublime `grep -rnF "$1"`
+    sublime `grep -rnF "$1"`
 } 
