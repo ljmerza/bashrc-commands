@@ -237,6 +237,8 @@ alias adbn='bower install && npm install'
 alias chbn='bower cache clean && npm cache clean'
 alias embr='rmbn && chbn && adbn'
 
+alias embs='cd /opt/$USER/www/UD_ember/UD;ember server'
+
 #-------------------------------------------------------------
 # Git aliases and functions
 #-------------------------------------------------------------
