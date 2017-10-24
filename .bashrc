@@ -221,6 +221,7 @@ alias it2="gunicorn index.py --log-level debug --timeout 6000"
 alias embs="cd /opt/$USER/www/UD_ember/UD/;rm -rf tmp/;ember serve"
 alias embp="cd /opt/$USER/www/UD_ember/UD/;ember build --prod"
 alias cdww="cd /opt/$USER/www/"
+
 code(){
     cd c:/codebase/"$1"
 }
@@ -238,6 +239,15 @@ alias chbn='bower cache clean && npm cache clean'
 alias embr='rmbn && chbn && adbn'
 
 alias embs='cd /opt/$USER/www/UD_ember/UD;ember server'
+
+alias morb='morbo -l http://*:28173 -w /opt/$USER/includes/ -w /opt/$USER/www/UD_api/ ud_server.pl'
+alias tmorb='morbo -l http://*:28173 -w /opt/$USER/includes/ -w /opt/$USER/www/teamdbapi/ teamdb.pl'
+
+alias hyp='hypnotoad /opt/$USER/www/UD_api/ud_server.pl'
+alias hyps='hypnotoad -s /opt/$USER/www/UD_api/ud_server.pl'
+
+alias thyp='hypnotoad /opt/$USER/www/teamdbapi/teamdb.pl'
+alias thyps='hypnotoad -s /opt/$USER/www/teamdbapi/teamdb.pl'
 
 #-------------------------------------------------------------
 # Git aliases and functions
