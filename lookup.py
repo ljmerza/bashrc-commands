@@ -1,5 +1,5 @@
 def lookup(dic, default,  key, *keys):
-	'''Recursively safely looks up a dict or nested dict's key values
+	'''safely looks up a dict or nested dict's key values recursively
 
 	Args
 		dic (dict) the dictionary to lookup
