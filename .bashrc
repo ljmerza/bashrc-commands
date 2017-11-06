@@ -154,6 +154,8 @@ alias fgrep='fgrep --color=auto'
 alias mkdir='mkdir -pv' #make parent dirs if needed
 alias mount='mount | column -t'
 
+alias ipf='ipconfig //flushdns'
+
 #-------------------------------------------------------------
 # iptables aliases
 #-------------------------------------------------------------
@@ -220,13 +222,19 @@ alias app-info="apt-cache showpkg"
 alias it2="gunicorn index.py --log-level debug --timeout 6000"
 alias embs="cd /opt/$USER/www/UD_ember/UD/;rm -rf tmp/;ember serve"
 alias embp="cd /opt/$USER/www/UD_ember/UD/;ember build --prod"
+
+alias home='cd /home/$USER/'
 alias cdww="cd /opt/$USER/www/"
+alias cdmod="cd /opt/$USER/includes/"
+alias cdcrn="cd /opt/$USER/crons/"
+alias cdemb="cd /opt/$USER/www/UD_ember/UD"
+alias cdtemb="cd /opt/$USER/www/teamdb_ember/teamdb"
 
 code(){
-    cd c:/codebase/"$1"
+    cd ~/Documents/codebase/"$1"
 }
+
 alias acoe='ssh acoe'
-alias home='cd /home/$USER/'
 alias itrack2='cd /home/$USER/iTrack2;it2'
 
 em () { 
@@ -291,6 +299,12 @@ alias grbc='git rebase --continue'
 alias grba='git rebase --abort'
 alias grbi='git rebase -i'
 
+
+gcomp(){
+    gadd .; gcom "$1";gpsh;glgs
+}
+
+
 grbs(){
     git rebase "$1";
 }
@@ -349,9 +363,13 @@ mkcd () # mkdir and cd into it
 
 
 google () {
-    u=`perl -MURI::Escape -wle 'print "http://google.com/search?q=".
-        uri_escape(join " ",  @ARGV)' $@`
-    /usr/bin/w3m -F $u
+    py_script="
+import urllib.parse
+import sys
+print(urllib.parse.quote(' '.join(sys.argv[1:])))
+"
+    queries=$(python -c "$py_script" "$@")
+    python -mwebbrowser http://google.com/search?q="$queries"
 }
 
 sublime() {
