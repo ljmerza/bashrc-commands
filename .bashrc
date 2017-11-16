@@ -300,10 +300,23 @@ alias grba='git rebase --abort'
 alias grbi='git rebase -i'
 
 
+
+
 gcomp(){
     gadd .; gcom "$1";gpsh;glgs
 }
 
+gacph(){
+    CM="automated commit"
+    if [ $# -eq 1 ]
+        then
+            CM="$1"
+    fi
+
+    git add .
+    git commit -m "$CM"
+    git push
+}
 
 grbs(){
     git rebase "$1";
