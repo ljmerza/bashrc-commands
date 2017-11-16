@@ -1,0 +1,9 @@
+<snippet>
+    <content><![CDATA[
+use M5::Log;
+ML->dumper($1 => \$1);
+    ]]></content>
+    <tabTrigger>log</tabTrigger>
+    <scope>source.perl</scope>
+    <description>logging</description>
+</snippet>
