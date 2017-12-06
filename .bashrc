@@ -220,7 +220,7 @@ alias app-info="apt-cache showpkg"
 # work aliases
 #-------------------------------------------------------------
 alias it2="gunicorn index.py --log-level debug --timeout 6000"
-alias embs="cd /opt/$USER/www/UD_ember/UD/;rm -rf tmp/;ember serve"
+alias embs="cd /opt/$USER/www/UD_ember/UD/;rm -rf tmp/;node --debug=7000 --inspect node_modules/ember-cli/bin/ember"
 alias embp="cd /opt/$USER/www/UD_ember/UD/;ember build --prod"
 
 alias home='cd /home/$USER/'
