@@ -65,7 +65,7 @@ date
 
 function __git_dirty {
   git diff --quiet HEAD &>/dev/null
-  [ $? == 1 ] && echo "!"
+  [ $? == 1 ] && echo "!DIRTY!"
 }
 
 function __git_branch {
@@ -73,11 +73,14 @@ function __git_branch {
 }
 
 bash_prompt() {
-  local NONE="\[\033[0m\]"    # unsets color to term's fg color
-  local UC=$White                 # user's color
-  [ $UID -eq "0" ] && UC=$Red   # root's color
-
-  PS1="\A $White$Red\w $Yellow\$(__git_branch)$Red\$(__git_dirty)${NONE}$ "
+  # time and user@host
+  PS1="\A \[${BCyan}\]\u\[${NC}\]@\[${Green}\]\h\[${NC}\] "
+  # path
+  PS1+="$White$Red\w "
+  # git branch
+  PS1+="$Yellow\$(__git_branch)"
+  # is committed?
+  PS1+="$ALERT\$(__git_dirty)${NC}$ "
 }
 
 bash_prompt
