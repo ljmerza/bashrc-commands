@@ -80,7 +80,7 @@ bash_prompt() {
   # git branch
   PS1+="$Yellow\$(__git_branch)"
   # is committed?
-  PS1+="$ALERT\$(__git_dirty)${NC}$ "
+  PS1+="$ALERT\$(__git_dirty)$NC$ "
 }
 
 bash_prompt
