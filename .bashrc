@@ -63,20 +63,28 @@ ALERT=${BWhite}${On_Red} # Bold White on red background
 echo -e "${BCyan}This is BASH ${BRed}${BASH_VERSION%.*}${BCyan} on ${BRed}$DISPLAY${NC}\n"
 date
 
-# parse out git branch checked out
-parse_git_branch() {
-     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
+function __git_dirty {
+  git diff --quiet HEAD &>/dev/null
+  [ $? == 1 ] && echo "!DIRTY!"
 }
 
-# Now we construct the prompt:
-# Time of day:
-PS1="[\A\[${NC}\] "
-# User@Host:
-PS1+="\[${BCyan}\]\u\[${NC}\]@\[${Green}\]\h\[${NC}\] "
-# PWD:
-PS1+="\w]\[${NC}\]"
-# git branch
-PS1+="\[${Yellow}\] \\$(parse_git_branch)\[${NC}\] \n$"
+function __git_branch {
+  __git_ps1 "(%s)"
+}
+
+bash_prompt() {
+  # time and user@host
+  PS1="\A \[${BCyan}\]\u\[${NC}\]@\[${Green}\]\h\[${NC}\] "
+  # path
+  PS1+="$White$Red\w "
+  # git branch
+  PS1+="$Yellow\$(__git_branch)"
+  # is committed?
+  PS1+="$ALERT\$(__git_dirty)$NC$ "
+}
+
+bash_prompt
+unset bash_prompt
 
 
 export TIMEFORMAT=$'\nreal %3R\tuser %3U\tsys %3S\tpcpu %P\n'
@@ -219,7 +227,6 @@ alias app-info="apt-cache showpkg"
 #-------------------------------------------------------------
 # work aliases
 #-------------------------------------------------------------
-alias it2="gunicorn index.py --log-level debug --timeout 6000"
 alias embs="cd /opt/$USER/www/UD_ember/UD/;rm -rf tmp/;node --debug=7000 --inspect node_modules/ember-cli/bin/ember"
 alias embp="cd /opt/$USER/www/UD_ember/UD/;ember build --prod"
 
@@ -230,6 +237,7 @@ alias cdcrn="cd /opt/$USER/crons/"
 alias cdemb="cd /opt/$USER/www/UD_ember/UD"
 alias cdtemb="cd /opt/$USER/www/teamdb_ember/teamdb"
 
+alias devC="home; cd devCenter; gunicorn serverIndex.py --timeout 6000"
 code(){
     cd ~/Documents/codebase/"$1"
 }
