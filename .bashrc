@@ -237,7 +237,7 @@ alias cdcrn="cd /opt/$USER/crons/"
 alias cdemb="cd /opt/$USER/www/UD_ember/UD"
 alias cdtemb="cd /opt/$USER/www/teamdb_ember/teamdb"
 
-alias devC="home; cd devCenter; gunicorn serverIndex.py --timeout 6000"
+alias devC="home;cd devCenter;python index.py prod"
 code(){
     cd ~/Documents/codebase/"$1"
 }
