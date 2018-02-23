@@ -237,13 +237,14 @@ alias cdcrn="cd /opt/$USER/crons/"
 alias cdemb="cd /opt/$USER/www/UD_ember/UD"
 alias cdtemb="cd /opt/$USER/www/teamdb_ember/teamdb"
 
-alias devC="home;cd devCenter;python index.py prod"
 code(){
     cd ~/Documents/codebase/"$1"
 }
 
 alias acoe='ssh acoe'
 alias itrack2='cd /home/$USER/iTrack2;it2'
+
+alias devC="home;cd devCenter;gunicorn index.py prod --log-level debug --timeout 60000"
 
 em () { 
     cd /opt/$USER/www/"$1"/UD_ember/UD/
