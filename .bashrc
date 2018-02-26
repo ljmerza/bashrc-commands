@@ -328,7 +328,7 @@ gacph(){
 gcph(){
     dt=$(date '+%d/%m/%Y %H:%M:%S');
     gcom "$dt";
-    gcph;
+    gpsh;
 }
 
 grbs(){
