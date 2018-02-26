@@ -327,7 +327,7 @@ gacph(){
 
 gcph(){
     dt=$(date '+%d/%m/%Y %H:%M:%S');
-    gcom "$dt";
+    gcom "automated commit $dt";
     gpsh;
 }
 
