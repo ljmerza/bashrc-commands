@@ -300,8 +300,6 @@ alias grss='git reset --soft'
 alias grsm='git reset --mixed'
 
 alias ggui='git gui'
-
-alias gcph='gcom "automated commit";gpsh'
 alias gcphu='gcph -u'
 
 alias grbc='git rebase --continue'
@@ -325,6 +323,12 @@ gacph(){
     git add .
     git commit -m "$CM"
     git push
+}
+
+gcph(){
+    dt=$(date '+%d/%m/%Y %H:%M:%S');
+    gcom "$dt";
+    gcph;
 }
 
 grbs(){
