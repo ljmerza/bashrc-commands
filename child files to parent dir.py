@@ -1,5 +1,4 @@
-# gets all files from subfolders of the CWD that aren't json files
-# and moves them to the CWD and deletes all subfolders
+# flattens a folder tree - all files to cwd
 
 
 from os.path import join,isdir
