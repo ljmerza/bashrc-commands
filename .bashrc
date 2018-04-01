@@ -76,11 +76,11 @@ bash_prompt() {
   # time and user@host
   PS1="\A \[${BCyan}\]\u\[${NC}\]@\[${Green}\]\h\[${NC}\] "
   # path
-  PS1+="$White$Red\w "
+  PS1+="\w "
   # git branch
-  PS1+="$Yellow\$(__git_branch)"
+  PS1+="\[${Yellow}\]\$(__git_branch)"
   # is committed?
-  PS1+="$ALERT\$(__git_dirty)$NC$ "
+  PS1+="\[${ALERT}\]\$(__git_dirty)\[${NC}\]$ "
 }
 
 bash_prompt
@@ -335,9 +335,9 @@ gcph(){
     gpsh;
 }
 
-grbs(){
-    git rebase "$1";
-}
+# grbs(){
+#     git rebase "$1";
+# }
 
 grsh() {
     git reset --hard HEAD~"$1";
