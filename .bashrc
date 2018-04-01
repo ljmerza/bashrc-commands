@@ -302,11 +302,15 @@ alias grsm='git reset --mixed'
 alias ggui='git gui'
 alias gcphu='gcph -u'
 
+alias grbs='git rebase'
 alias grbc='git rebase --continue'
 alias grba='git rebase --abort'
 alias grbi='git rebase -i'
 
-
+alias gfor='git fetch origin'
+grsa(){
+    "git reset --hard origin/$1"
+}
 
 
 gcomp(){
