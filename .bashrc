@@ -301,9 +301,6 @@ alias grsm='git reset --mixed'
 
 alias ggui='git gui'
 
-alias gcph='gcom "automated commit";gpsh'
-alias gcphu='gcph -u'
-
 alias grbc='git rebase --continue'
 alias grba='git rebase --abort'
 alias grbi='git rebase -i'
@@ -336,6 +333,8 @@ gdph(){
     gcom "automated commit $dt";
     gpsh;
 }
+alias gcph='gcom "automated commit";gpsh'
+alias gcphu='gcph -u'
 
 grsh() {
     git reset --hard HEAD~"$1";
