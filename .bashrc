@@ -300,9 +300,10 @@ alias grss='git reset --soft'
 alias grsm='git reset --mixed'
 
 alias ggui='git gui'
+
+alias gcph='gcom "automated commit";gpsh'
 alias gcphu='gcph -u'
 
-alias grbs='git rebase'
 alias grbc='git rebase --continue'
 alias grba='git rebase --abort'
 alias grbi='git rebase -i'
@@ -312,6 +313,9 @@ grsa(){
     "git reset --hard origin/$1"
 }
 
+grebs(){
+    git rebase "$1";
+}
 
 gcomp(){
     gadd .; gcom "$1";gpsh;glgs
@@ -324,20 +328,14 @@ gacph(){
             CM="$1"
     fi
 
-    git add .
-    git commit -m "$CM"
-    git push
+    git add .;git commit -m "$CM";git push;
 }
 
-gcph(){
+gdph(){
     dt=$(date '+%d/%m/%Y %H:%M:%S');
     gcom "automated commit $dt";
     gpsh;
 }
-
-# grbs(){
-#     git rebase "$1";
-# }
 
 grsh() {
     git reset --hard HEAD~"$1";
