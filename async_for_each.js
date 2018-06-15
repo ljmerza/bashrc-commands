@@ -6,7 +6,7 @@ async function asyncForEach(array, callback) {
 
 
 // use
-await sync_helpers.asyncForEach(log_files, async log_file => {
+await async_for_each(log_files, async log_file => {
 	try {
 		await _sync_a_log(log_file);
 	} catch(err){

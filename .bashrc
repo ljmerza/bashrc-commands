@@ -227,7 +227,7 @@ alias app-info="apt-cache showpkg"
 #-------------------------------------------------------------
 # work aliases
 #-------------------------------------------------------------
-alias embs="cd /opt/$USER/www/UD_ember/UD/;rm -rf tmp/;node --debug=7000 --inspect node_modules/ember-cli/bin/ember"
+alias embs='cd /opt/$USER/www/UD_ember/UD/;rm -rf tmp/;ember server'
 alias embp="cd /opt/$USER/www/UD_ember/UD/;ember build --prod"
 
 alias home='cd /home/$USER/'
@@ -244,7 +244,10 @@ code(){
 alias acoe='ssh acoe'
 alias itrack2='cd /home/$USER/iTrack2;it2'
 
-alias devC="home;cd devCenter;nohup gunicorn index.py prod --log-level debug --timeout 60000 &"
+alias devCenter='cd opt/$USER/www/devCenter/server/'
+alias devC="devCenter; nohup gunicorn index.py prod --log-level debug --timeout 60000 &"
+alias devCbeta="devCenter; nohup gunicorn index.py prod beta --log-level debug --timeout 60000 &"
+alias devCbetanow="devCenter; nohup gunicorn index.py prod beta betanow --log-level debug --timeout 60000 &"
 
 em () { 
     cd /opt/$USER/www/"$1"/UD_ember/UD/
@@ -328,12 +331,12 @@ gacph(){
     git add .;git commit -m "$CM";git push;
 }
 
-gdph(){
-    dt=$(date '+%d/%m/%Y %H:%M:%S');
-    gcom "automated commit $dt";
-    gpsh;
+gcph(){
+    dt=$(date '+%d/%m/%Y %H:%M:%S')
+    gcom "automated commit $dt"
+    gpsh
 }
-alias gcph='gcom "automated commit";gpsh'
+# alias gcph='gcom "automated commit";gpsh'
 alias gcphu='gcph -u'
 
 grsh() {
