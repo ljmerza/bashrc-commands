@@ -1,0 +1,49 @@
+{
+    "files.exclude": {
+        ".git": true,
+        ".svn": true,
+        "node_modules": true,
+        "bower_components": true
+    },
+    "workbench.editor.enablePreview": false,
+    "explorer.autoReveal": false,
+    "files.watcherExclude": {
+        ".git": true,
+        "node_modules": true
+    },
+
+    "search.exclude": {
+        "node_modules": true,
+        "bower_components": true
+      },
+
+    "editor.fontSize": 18,
+    "editor.fontFamily": "'Fira Code', Consolas, 'Courier New', monospace",
+
+    "editor.smoothScrolling": true,
+    "editor.cursorStyle": "line-thin",
+    "editor.wordWrap": "on",
+
+    "window.title": "${dirty}${activeEditorMedium}",
+
+    "http.proxyStrictSSL": false,
+    "typescript.npm": "C:/Program Files/nodejs",
+    "editor.minimap.enabled": true,
+    "workbench.colorTheme": "Visual Studio Dark",
+    "terminal.integrated.shell.windows": "C:\\Program Files\\Git\\bin\\bash.exe",
+    "explorer.confirmDelete": false,
+    "gitlens.keymap": "chorded",
+    "gitlens.historyExplorer.enabled": true,
+    "gitlens.advanced.messages": {
+        "suppressShowKeyBindingsNotice": true
+    },
+    "[typescript]": {
+		
+    },
+    "window.zoomLevel": 1,
+    "[javascript]": {},
+    "workbench.statusBar.feedback.visible": false,
+
+
+    "gitlens.blame.format": "${message|30?} ${author} (${ago})",
+}
