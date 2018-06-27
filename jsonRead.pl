@@ -3,10 +3,6 @@
 use strict;
 use warnings;
 
-BEGIN {	use lib ( "/opt/@{[ ( getpwuid($<) )[0] ]}/includes", '/opt/DTI/modules', '/opt/includes' ); }
-
-use Data::Dumper;
-
 #####################################################
 my ($volume, $directory) = File::Spec->splitpath(__FILE__);
 my $file = "$directory/data.json";

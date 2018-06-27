@@ -227,30 +227,29 @@ alias app-info="apt-cache showpkg"
 #-------------------------------------------------------------
 # work aliases
 #-------------------------------------------------------------
-alias embs='cd /opt/$USER/www/UD_ember/UD/;rm -rf tmp/;ember server'
-alias embp="cd /opt/$USER/www/UD_ember/UD/;ember build --prod"
+export USERDIR=/home/$USER/
 
-alias home='cd /home/$USER/'
-alias cdww="cd /opt/$USER/www/"
-alias cdmod="cd /opt/$USER/includes/"
-alias cdcrn="cd /opt/$USER/crons/"
-alias cdemb="cd /opt/$USER/www/UD_ember/UD"
-alias cdtemb="cd /opt/$USER/www/teamdb_ember/teamdb"
+alias embs='cd $USERDIR/www/UD_ember/UD/;rm -rf tmp/;ember server'
+alias embp="cd $USERDIR/www/UD_ember/UD/;ember build --prod"
+
+alias home='cd $USERDIR'
+alias cdww="cd $USERDIR/www/"
+alias cdmod="cd $USERDIR/includes/"
+alias cdcrn="cd $USERDIR/crons/"
+alias cdemb="cd $USERDIR/www/UD_ember/UD"
+alias cdtemb="cd $USERDIR/www/teamdb_ember/teamdb"
 
 code(){
     cd ~/Documents/codebase/"$1"
 }
 
-alias acoe='ssh acoe'
-alias itrack2='cd /home/$USER/iTrack2;it2'
-
-alias devCenter='cd opt/$USER/www/devCenter/server/'
+alias devCenter="cd $USERDIR/www/devCenter/server/"
 alias devC="devCenter; nohup gunicorn index.py prod --log-level debug --timeout 60000 &"
 alias devCbeta="devCenter; nohup gunicorn index.py prod beta --log-level debug --timeout 60000 &"
 alias devCbetanow="devCenter; nohup gunicorn index.py prod beta betanow --log-level debug --timeout 60000 &"
 
 em () { 
-    cd /opt/$USER/www/"$1"/UD_ember/UD/
+    cd $USERDIR/www/"$1"/UD_ember/UD/
 }
 
 alias rmbn='rm -rdf node_modules && rm -rdf bower_components'
@@ -258,16 +257,14 @@ alias adbn='bower install && npm install'
 alias chbn='bower cache clean && npm cache clean'
 alias embr='rmbn && chbn && adbn'
 
-alias embs='cd /opt/$USER/www/UD_ember/UD;ember server'
+alias morb='morbo -l http://*:28173 -w /$USERDIR/includes/ -w $USERDIR/www/UD_api/ ud_server.pl'
+alias tmorb='morbo -l http://*:28173 -w $USERDIR/includes/ -w $USERDIR/www/teamdbapi/ teamdb.pl'
 
-alias morb='morbo -l http://*:28173 -w /opt/$USER/includes/ -w /opt/$USER/www/UD_api/ ud_server.pl'
-alias tmorb='morbo -l http://*:28173 -w /opt/$USER/includes/ -w /opt/$USER/www/teamdbapi/ teamdb.pl'
+alias hyp='hypnotoad $USERDIR/www/UD_api/ud_server.pl'
+alias hyps='hypnotoad -s $USERDIR/www/UD_api/ud_server.pl'
 
-alias hyp='hypnotoad /opt/$USER/www/UD_api/ud_server.pl'
-alias hyps='hypnotoad -s /opt/$USER/www/UD_api/ud_server.pl'
-
-alias thyp='hypnotoad /opt/$USER/www/teamdbapi/teamdb.pl'
-alias thyps='hypnotoad -s /opt/$USER/www/teamdbapi/teamdb.pl'
+alias thyp='hypnotoad $USERDIR/www/teamdbapi/teamdb.pl'
+alias thyps='hypnotoad -s $USERDIR/www/teamdbapi/teamdb.pl'
 
 #-------------------------------------------------------------
 # Git aliases and functions
@@ -309,13 +306,9 @@ alias grba='git rebase --abort'
 alias grbi='git rebase -i'
 
 alias gfor='git fetch origin'
-grsa(){
-    "git reset --hard origin/$1"
-}
-
-grebs(){
-    git rebase "$1";
-}
+alias gplo='git pull origin '
+alias grsa="git reset --hard origin/"
+alias grebs='git rebase'
 
 gcomp(){
     gadd .; gcom "$1";gpsh;glgs
