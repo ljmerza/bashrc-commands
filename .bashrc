@@ -121,6 +121,8 @@ alias functions='set | grep "()"'
 alias ipf='ipconfig //flushdns'
 alias c='clear'
 
+alias ncu='winpty ncu.cmd'
+
 alias path='echo -e ${PATH//:/\\n}'
 alias now='date +"%T"'
 alias nowtime=now
@@ -161,8 +163,6 @@ alias egrep='egrep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias mkdir='mkdir -pv' #make parent dirs if needed
 alias mount='mount | column -t'
-
-alias ipf='ipconfig //flushdns'
 
 #-------------------------------------------------------------
 # iptables aliases
