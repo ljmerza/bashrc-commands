@@ -1,0 +1,32 @@
+@-moz-document url-prefix("https://www.nelnet.com/Loan/Details#") {
+/* ==UserStyle==
+@name        Nelnet loan compactor
+@namespace   github.com/openstyles/stylus
+@version     1.0.0
+@license     MIT
+==/UserStyle== */
+.account-detail {
+    width: 30%;
+    padding-bottom: 0px;
+    border-left-style: solid;
+    border-left-color: #777;
+}
+
+div.col-sm-12.marg-bottom-150 > div > div.primary-box.p-b-xs > div:nth-child(1) > div.groupLoanDetails.ng-scope > div > div:nth-child(2),
+div.col-sm-12.marg-bottom-150 > div > div.primary-box.p-b-xs > div:nth-child(1) > div.groupLoanDetails.ng-scope > div > a,
+div.col-sm-12.marg-bottom-150 > div > div.primary-box.p-b-xs > div:nth-child(1) > div.groupLoanDetails.ng-scope > div > div:nth-child(3) > div > table > tbody > tr:nth-child(3){
+    display: none;
+}
+
+div.col-sm-12.marg-bottom-150 > div > div.primary-box.p-b-xs > div:nth-child(1) > div.groupLoanDetails.ng-scope > div > div:nth-child(3),
+div.col-sm-12.marg-bottom-150 > div > div.primary-box.p-b-xs > div:nth-child(1) > div.groupLoanDetails.ng-scope > div > div:nth-child(4) {
+    width: 50%;
+}
+
+td, tr, th {
+    padding: 0 !important; 
+    padding-left: 5px !important;
+}
+
+
+}
