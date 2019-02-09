@@ -34,3 +34,51 @@ function _subtractDays(epoch, numberOfDays){
 
 	return epoch;
 }
+
+/**
+ * [monthMap description]
+ * @type {Object}
+ */
+export const monthMap = {
+	1: 'January',
+	2: 'Febuary',
+	3: 'March',
+	4: 'April',
+	5: 'May',
+	6: 'June',
+	7: 'July',
+	8: 'August',
+	9: 'Sepember',
+	10: 'October',
+	11: 'November',
+	12: 'December'
+}
+
+/**
+ * [pluralizedDay description]
+ * @param  {[type]} day [description]
+ * @return {[type]}     [description]
+ */
+export function pluralizedDay(day){
+	if(day%10 === 1) return 'st';
+	else if(day%10 === 2) return 'nd';
+	else if(day%10 === 3) return 'rd';
+	else return 'th';
+ }
+
+/**
+ * [formatDisplayDate description]
+ * @param  {[type]} hyphenDate [description]
+ * @return {[type]}            [description]
+ */
+ export function formatDisplayDate(hyphenDate){
+ 	const [year, month, day] = hyphenDate.split('-');
+
+ 	const singleMonth  = parseInt(month);
+ 	const singleDay = parseInt(day);
+
+    const pluralWord = pluralizedDay(day) || '';
+    const monthName = monthMap[parseInt(singleMonth)] || '';
+
+    return `${monthName} ${singleDay}${pluralWord}, ${year}`;
+ }
