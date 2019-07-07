@@ -189,13 +189,11 @@ uppp() {
     cd ../../../"$1";
 }
 
-
 #-------------------------------------------------------------
 # Angular aliases
 #-------------------------------------------------------------
 alias ngse="ng serve"
 alias ngbp="ng build --target=production"
-
 
 #-------------------------------------------------------------
 # Spelling typos
@@ -209,8 +207,6 @@ alias sl='ls'
 alias le='ls'
 alias gerp=grep
 
-
-
 #-------------------------------------------------------------
 # apt-get aliases
 #-------------------------------------------------------------
@@ -223,56 +219,13 @@ alias app-search-all="apt-cache search"
 alias app-update="sudo apt-get update && sudo apt-get upgrade"
 alias app-info="apt-cache showpkg"
 
-
-#-------------------------------------------------------------
-# work aliases
-#-------------------------------------------------------------
-export USERDIR=/home/$USER/
-
-alias embs='cd $USERDIR/www/UD_ember/UD/;rm -rf tmp/;ember server'
-alias embp="cd $USERDIR/www/UD_ember/UD/;ember build --prod"
-
-alias home='cd $USERDIR'
-alias cdww="cd $USERDIR/www/"
-alias cdmod="cd $USERDIR/includes/"
-alias cdcrn="cd $USERDIR/crons/"
-alias cdemb="cd $USERDIR/www/UD_ember/UD"
-alias cdtemb="cd $USERDIR/www/teamdb_ember/teamdb"
-
-code(){
-    cd ~/Documents/codebase/"$1"
-}
-
-alias devCenter="cd $USERDIR/www/devCenter/server/"
-alias devC="devCenter; nohup gunicorn index.py prod --log-level debug --timeout 60000 &"
-alias devCbeta="devCenter; nohup gunicorn index.py prod beta --log-level debug --timeout 60000 &"
-alias devCbetanow="devCenter; nohup gunicorn index.py prod beta betanow --log-level debug --timeout 60000 &"
-
-em () { 
-    cd $USERDIR/www/"$1"/UD_ember/UD/
-}
-
-alias rmbn='rm -rdf node_modules && rm -rdf bower_components'
-alias adbn='bower install && npm install'
-alias chbn='bower cache clean && npm cache clean'
-alias embr='rmbn && chbn && adbn'
-
-alias morb='morbo -l http://*:28173 -w /$USERDIR/includes/ -w $USERDIR/www/UD_api/ ud_server.pl'
-alias tmorb='morbo -l http://*:28173 -w $USERDIR/includes/ -w $USERDIR/www/teamdbapi/ teamdb.pl'
-
-alias hyp='hypnotoad $USERDIR/www/UD_api/ud_server.pl'
-alias hyps='hypnotoad -s $USERDIR/www/UD_api/ud_server.pl'
-
-alias thyp='hypnotoad $USERDIR/www/teamdbapi/teamdb.pl'
-alias thyps='hypnotoad -s $USERDIR/www/teamdbapi/teamdb.pl'
-
 #-------------------------------------------------------------
 # Git aliases and functions
 #-------------------------------------------------------------
 alias gadd='git add'
 alias gcom='git commit -am'
 alias gpsh='git push'
-alias gpshu='git push -u'
+alias gpshu='git push -u origin '
 alias gpll='git pull'
 
 alias gmrg='git merge --no-commit'
@@ -329,6 +282,7 @@ gcph(){
     gcom "automated commit $dt"
     gpsh
 }
+
 # alias gcph='gcom "automated commit";gpsh'
 alias gcphu='gcph -u'
 
@@ -353,7 +307,6 @@ gshw() {
     git show "$1"
 }
 
-
 gdel() {
     grsh "$1";
     git clean -fd;
@@ -361,44 +314,11 @@ gdel() {
     git status
 }
 
-
-
-#  create new alias from cmd line
-# ALIASES=~/.aliases
-# function add_alias {
-#    echo "alias $1='$2'" >> $ALIASES;
-#    echo Adding alias: `tail -1 $ALIASES`;
-#    source $ALIASES;
-# }
-
-mkcd () # mkdir and cd into it
-{ 
+ # mkdir and cd into it
+mkcd() { 
     mkdir -p "$1";
     cd "$1"
 }
-
-#  create new repo on github
- gitRepo () {
-     curl -u 'myuser' https://api.github.com/user/repos -d "{\"name\":\"\"$1\"\"}";
-     git remote add origin git@github.com:myuser/"$1".git;
-     git push -u origin master;
-}
-
-
-google () {
-    py_script="
-import urllib.parse
-import sys
-print(urllib.parse.quote(' '.join(sys.argv[1:])))
-"
-    queries=$(python -c "$py_script" "$@")
-    python -mwebbrowser http://google.com/search?q="$queries"
-}
-
-sublime() {
-    "C:/Program Files/Sublime Text 3/sublime_text.exe" "$1"
-}
-
 
 extract () {
     if [ -f $1 ] ; then
@@ -421,22 +341,6 @@ extract () {
         echo "'$1' is not a valid file"
     fi
 }
-
-
-
-mine(){ 
-    user=${1-$USER};
-    # list all results found
-    git branch -a | grep origin/$user; 
-    # get list of results, wc=get number of lines, pipe through echo output
-    git branch -a | grep origin/$user | wc -l | xargs -I count echo there are count branches by $user; 
-}
-
-nuke(){
-    git branch -a | grep origin/$USER | grep -o $USER.* | xargs -I line git push origin :line; 
-}
-
-
 
 sfind(){
     sublime `grep -rnF "$1"`
